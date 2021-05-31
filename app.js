@@ -42,6 +42,7 @@ async function searchMovie(query) {
     movies.push({
       title: movie.original_title,
       poster: completeImgUrl,
+      summary: movie.overview,
     });
   });
 
@@ -63,10 +64,20 @@ function renderMovies() {
     const img = document.createElement("img");
     img.src = movie.poster;
 
+    const movieSummary = document.createElement("div");
+    movieSummary.classList.add("movie-summary");
+
+    if (movie.summary.length > 150) {
+      movieSummary.textContent = `${movie.summary.slice(0, 150)}...`;
+    } else {
+      movieSummary.textContent = movie.summary;
+    }
+
     imgContainer.appendChild(img);
 
     movieEl.appendChild(h3Title);
     movieEl.appendChild(imgContainer);
+    movieEl.appendChild(movieSummary);
 
     moviesEl.appendChild(movieEl);
   });

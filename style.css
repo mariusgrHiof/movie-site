@@ -41,6 +41,32 @@ img {
 #movies {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  row-gap: 5em;
+}
+.movie {
+  position: relative;
+}
+
+.movie:hover .movie-summary {
+  transform: translateY(-50%);
+  visibility: visible;
+}
+
+.movie-summary {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  padding: 1em;
+  line-height: 140%;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transition: 0.7s ease-in-out;
+  visibility: hidden;
+  transform: translateY(0);
+}
+
+.title {
+  text-align: center;
 }
 
 #movieDB-container {
