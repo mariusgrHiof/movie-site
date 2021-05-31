@@ -67,16 +67,12 @@ function renderMovies() {
     const movieSummary = document.createElement("div");
     movieSummary.classList.add("movie-summary");
 
-    if (movie.summary.length > 150) {
-      movieSummary.textContent = `${movie.summary.slice(0, 150)}...`;
-    } else {
-      movieSummary.textContent = movie.summary;
-    }
+    movieSummary.textContent = movie.summary;
 
     imgContainer.appendChild(img);
 
-    movieEl.appendChild(h3Title);
     movieEl.appendChild(imgContainer);
+    movieEl.appendChild(h3Title);
     movieEl.appendChild(movieSummary);
 
     moviesEl.appendChild(movieEl);
