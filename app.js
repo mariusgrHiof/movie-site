@@ -1,7 +1,5 @@
 "use strict";
 
-const key = "c1a299b1b07f504df816ef7dcf5ad793";
-
 let movies = [];
 const moviesEl = document.getElementById("movies");
 const searchEl = document.getElementById("search");
@@ -24,32 +22,33 @@ searchEl.addEventListener("keyup", (e) => {
 });
 
 async function searchMovie(query) {
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${query}`;
-  const imgUrl = `https://api.themoviedb.org/3/configuration?api_key=${key}`;
-  const result = await fetch(url);
-  const data = await result.json();
-  console.log(data);
-
-  const imgData = await fetch(imgUrl);
+  const imgData = await fetch("/.netlify/functions/getimgs");
   const imgResult = await imgData.json();
+
+  const response = await fetch(
+    `/.netlify/functions//searchmovies?query=${query}`
+  );
+  const data = await response.json();
 
   const baseImgUrl = imgResult.images.base_url;
 
   let postSize = imgResult.images.poster_sizes[4];
 
-  data.results.forEach((movie) => {
-    const completeImgUrl = `${baseImgUrl}/${postSize}${movie.poster_path}`;
-    movies.push({
-      title: movie.original_title,
-      poster: completeImgUrl,
-      summary: movie.overview,
+  if (data) {
+    data.forEach((movie) => {
+      const completeImgUrl = `${baseImgUrl}/${postSize}${movie.poster_path}`;
+      movies.push({
+        title: movie.original_title,
+        poster: completeImgUrl,
+        summary: movie.overview,
+      });
     });
-  });
 
-  renderMovies();
+    renderMovies(movies);
+  }
 }
 
-function renderMovies() {
+function renderMovies(movies) {
   movies.forEach((movie) => {
     const movieEl = document.createElement("div");
     movieEl.classList.add("movie");
@@ -74,7 +73,6 @@ function renderMovies() {
     movieEl.appendChild(imgContainer);
     movieEl.appendChild(h3Title);
     movieEl.appendChild(movieSummary);
-
     moviesEl.appendChild(movieEl);
   });
 }

@@ -1,0 +1,26 @@
+{
+  "name": "movie-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "lambda-serve": "netlify-lambda serve functions",
+    "lambda-build": "netlify-lambda build functions"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariusgrHiof/movie-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariusgrHiof/movie-site/issues"
+  },
+  "homepage": "https://github.com/mariusgrHiof/movie-site#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "netlify-lambda": "^2.0.8",
+    "node-fetch": "^2.6.1"
+  }
+}
