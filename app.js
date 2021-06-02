@@ -26,7 +26,7 @@ async function searchMovie(query) {
   const imgResult = await imgData.json();
 
   const response = await fetch(
-    `/.netlify/functions//searchmovies?query=${query}`
+    `/.netlify/functions/searchmovies?query=${query}`
   );
   const data = await response.json();
 
