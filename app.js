@@ -30,7 +30,7 @@ async function searchMovie(query) {
   );
   const data = await response.json();
 
-  const baseImgUrl = imgResult.images.base_url;
+  const baseImgUrl = imgResult.images.secure_base_url;
 
   let postSize = imgResult.images.poster_sizes[4];
 
