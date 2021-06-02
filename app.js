@@ -34,7 +34,7 @@ async function searchMovie(query) {
 
   let postSize = imgResult.images.poster_sizes[4];
 
-  if (data) {
+  if (data.length > 0) {
     data.forEach((movie) => {
       const completeImgUrl = `${baseImgUrl}/${postSize}${movie.poster_path}`;
       movies.push({
