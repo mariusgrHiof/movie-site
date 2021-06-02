@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-color: #373b69;
+  background-color: #292a3f;
   font-family: "Roboto", sans-serif;
 }
 
@@ -33,6 +33,9 @@ img {
 
 #search:focus {
   outline: none;
+}
+#search::placeholder {
+  color: #9aa1df;
 }
 
 .btn {
@@ -59,7 +62,7 @@ img {
 }
 .movie {
   position: relative;
-  background-color: #708ed2;
+  background-color: #313d5a;
   margin: 1em 0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
   border-radius: 3px;

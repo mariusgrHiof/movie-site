@@ -1,6 +1,7 @@
 "use strict";
 
 let movies = [];
+let genres = [];
 const moviesEl = document.getElementById("movies");
 const searchEl = document.getElementById("search");
 const searchBtn = document.getElementById("search-btn");
@@ -22,29 +23,57 @@ searchEl.addEventListener("keyup", (e) => {
 });
 
 async function searchMovie(query) {
-  const imgData = await fetch("/.netlify/functions/getimgs");
+  const imgData = await fetch("http://localhost:9000/getimgs");
+  // const imgData = await fetch("/.netlify/functions/getimgs");
   const imgResult = await imgData.json();
 
   const response = await fetch(
-    `/.netlify/functions/searchmovies?query=${query}`
+    `http://localhost:9000/searchmovies?query=${query}`
   );
-  const data = await response.json();
 
+  const genresData = await fetch("http://localhost:9000/getgenres");
+  const genresResult = await genresData.json();
+  // const response = await fetch(
+  //   `/.netlify/functions/searchmovies?query=${query}`
+  // );
+  const data = await response.json();
   const baseImgUrl = imgResult.images.secure_base_url;
 
   let postSize = imgResult.images.poster_sizes[4];
 
+  populateGenres(genresResult);
+
   if (data.length > 0) {
     data.forEach((movie) => {
       const completeImgUrl = `${baseImgUrl}/${postSize}${movie.poster_path}`;
+      let genresList = [];
+      movie.genre_ids.forEach((id) => {
+        genres.forEach((currentGenre) => {
+          if (currentGenre[id]) genresList.push(currentGenre[id]);
+        });
+      });
+
       movies.push({
         title: movie.original_title,
         poster: completeImgUrl,
         summary: movie.overview,
+        year: movie.release_date.slice(0, 4),
+        rating: movie.vote_average,
+        genres: genresList,
       });
     });
 
     renderMovies(movies);
+  }
+}
+
+function populateGenres(genresResult) {
+  if (genresResult.genres.length > 0) {
+    genresResult.genres.forEach((genre) => {
+      genres.push({
+        [genre.id]: genre.name,
+      });
+    });
   }
 }
 
