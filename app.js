@@ -33,7 +33,7 @@ async function searchMovie(query) {
       `/.netlify/functions/searchmovies?query=${query}`
     );
 
-    const genresData = await fetch('/.netlify/functions//getgenres');
+    const genresData = await fetch('/.netlify/functions/getgenres');
     const genresResult = await genresData.json();
 
     const data = await response.json();

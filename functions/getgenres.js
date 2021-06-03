@@ -3,7 +3,7 @@ const axios = require('axios');
 exports.handler = function (event, context, callback) {
   const { key } = process.env;
 
-  const imgUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${key}&language=en-US
+  const genreUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${key}&language=en-US
 `;
 
   //Send user response
@@ -22,7 +22,7 @@ exports.handler = function (event, context, callback) {
   // Perform API calls
   const getGenres = () => {
     axios
-      .get(imgUrl)
+      .get(genreUrl)
       .then((res) => send(res.data))
       .catch((err) => send(err));
   };
