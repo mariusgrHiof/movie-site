@@ -1,11 +1,10 @@
-const axios = require("axios");
+const axios = require('axios');
 
 exports.handler = function (event, context, callback) {
-  // const { key } = process.env;
-  const key = "c1a299b1b07f504df816ef7dcf5ad793";
+  const { key } = process.env;
 
   const { queryStringParameters } = event;
-  const searchString = queryStringParameters["query"];
+  const searchString = queryStringParameters['query'];
 
   const MAIN_API_ENDPOINT = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${searchString}`;
 
@@ -14,9 +13,9 @@ exports.handler = function (event, context, callback) {
     callback(null, {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Acess-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type,Accept",
+        'Access-Control-Allow-Origin': '*',
+        'Acess-Control-Allow-Headers':
+          'Origin, X-Requested-With, Content-Type,Accept',
       },
       body: JSON.stringify(body),
     });

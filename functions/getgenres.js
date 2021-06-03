@@ -1,8 +1,7 @@
-const axios = require("axios");
+const axios = require('axios');
 
 exports.handler = function (event, context, callback) {
-  // const { key } = process.env;
-  const key = "c1a299b1b07f504df816ef7dcf5ad793";
+  const { key } = process.env;
 
   const imgUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${key}&language=en-US
 `;
@@ -12,9 +11,9 @@ exports.handler = function (event, context, callback) {
     callback(null, {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Acess-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type,Accept",
+        'Access-Control-Allow-Origin': '*',
+        'Acess-Control-Allow-Headers':
+          'Origin, X-Requested-With, Content-Type,Accept',
       },
       body: JSON.stringify(body),
     });
