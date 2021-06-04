@@ -26,20 +26,15 @@ searchEl.addEventListener("keypress", (e) => {
 
 async function searchMovie(query) {
   if (query.trim() !== "") {
-    // const imgData = await fetch("/.netlify/functions/getimgs");
-    const imgData = await fetch("http://localhost:9000/getimgs");
+    const imgData = await fetch("/.netlify/functions/getimgs");
 
     const imgResult = await imgData.json();
 
-    // const response = await fetch(
-    //   `/.netlify/functions/searchmovies?query=${query}`
-    // );
     const response = await fetch(
-      `http://localhost:9000/searchmovies?query=${query}`
+      `/.netlify/functions/searchmovies?query=${query}`
     );
 
-    // const genresData = await fetch("/.netlify/functions/getgenres");
-    const genresData = await fetch("http://localhost:9000/getgenres");
+    const genresData = await fetch("/.netlify/functions/getgenres");
     const genresResult = await genresData.json();
 
     const data = await response.json();
