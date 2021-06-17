@@ -1,39 +1,40 @@
-'use strict';
+"use strict";
 
 let movies = [];
 let genres = [];
-const moviesEl = document.getElementById('movies');
-const searchEl = document.getElementById('search');
-const searchBtn = document.getElementById('search-btn');
+const moviesEl = document.getElementById("movies");
+const searchEl = document.getElementById("search");
+const searchBtn = document.getElementById("search-btn");
 
-searchBtn.addEventListener('click', () => {
+searchBtn.addEventListener("click", () => {
   movies = [];
   genres = [];
-  moviesEl.innerHTML = '';
+  moviesEl.innerHTML = "";
   searchMovie(searchEl.value);
-  searchEl.value = '';
+  searchEl.value = "";
 });
 
-searchEl.addEventListener('keyup', (e) => {
-  if (e.code === 'Enter') {
+searchEl.addEventListener("keypress", (e) => {
+  if (e.keyCode === 13) {
     movies = [];
     genres = [];
-    moviesEl.innerHTML = '';
+    moviesEl.innerHTML = "";
     searchMovie(searchEl.value);
-    searchEl.value = '';
+    searchEl.value = "";
   }
 });
 
 async function searchMovie(query) {
-  if (query.trim() !== '') {
-    const imgData = await fetch('/.netlify/functions/getimgs');
+  if (query.trim() !== "") {
+    const imgData = await fetch("/.netlify/functions/getimgs");
+
     const imgResult = await imgData.json();
 
     const response = await fetch(
       `/.netlify/functions/searchmovies?query=${query}`
     );
 
-    const genresData = await fetch('/.netlify/functions/getgenres');
+    const genresData = await fetch("/.netlify/functions/getgenres");
     const genresResult = await genresData.json();
 
     const data = await response.json();
@@ -77,7 +78,7 @@ async function searchMovie(query) {
       moviesEl.innerHTML = `No results for ${query}`;
     }
   } else {
-    moviesEl.innerHTML = '';
+    moviesEl.innerHTML = "";
   }
 }
 
@@ -93,46 +94,46 @@ function populateGenres(genresResult) {
 
 function renderMovies(movies) {
   movies.forEach((movie) => {
-    const movieEl = document.createElement('div');
-    movieEl.classList.add('movie');
+    const movieEl = document.createElement("div");
+    movieEl.classList.add("movie");
 
-    const imgContainer = document.createElement('div');
-    imgContainer.classList.add('img-container');
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
 
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = movie.poster;
 
-    const infoContainer = document.createElement('div');
-    infoContainer.classList.add('info-container');
+    const infoContainer = document.createElement("div");
+    infoContainer.classList.add("info-container");
 
-    const topInfo = document.createElement('div');
-    topInfo.classList.add('top-info');
+    const topInfo = document.createElement("div");
+    topInfo.classList.add("top-info");
 
-    const title = document.createElement('span');
-    title.classList.add('title');
+    const title = document.createElement("span");
+    title.classList.add("title");
     title.textContent = movie.title;
 
-    const rating = document.createElement('span');
-    rating.classList.add('rating');
+    const rating = document.createElement("span");
+    rating.classList.add("rating");
     rating.classList.add(getRatingcolor(movie.rating));
     rating.textContent = movie.rating;
 
-    const year = document.createElement('span');
-    year.classList.add('year');
+    const year = document.createElement("span");
+    year.classList.add("year");
     year.textContent = movie.year;
 
-    const genres = document.createElement('div');
-    genres.classList.add('genres');
+    const genres = document.createElement("div");
+    genres.classList.add("genres");
 
     movie.genres.forEach((genre) => {
-      const span = document.createElement('span');
-      span.classList.add('genre');
+      const span = document.createElement("span");
+      span.classList.add("genre");
       span.textContent = genre;
       genres.appendChild(span);
     });
 
-    const movieSummary = document.createElement('div');
-    movieSummary.classList.add('movie-summary');
+    const movieSummary = document.createElement("div");
+    movieSummary.classList.add("movie-summary");
 
     movieSummary.textContent = movie.summary;
 
@@ -154,11 +155,11 @@ function renderMovies(movies) {
 
 function getRatingcolor(score) {
   if (score >= 0 && score <= 4) {
-    return 'red';
+    return "red";
   } else if (score > 4 && score <= 6) {
-    return 'orange';
+    return "orange";
   } else if (score > 6) {
-    return 'green';
+    return "green";
   }
 }
 
@@ -174,7 +175,7 @@ function createMovieObject(
     title,
     poster: completeImgUrl,
     summary: overview,
-    year: year ? year.slice(0, 4) : '',
+    year: year ? year.slice(0, 4) : "",
     rating: vote_average,
     genres: genresList,
   };

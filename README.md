@@ -29,6 +29,7 @@ This is a movie search site inspired by IMDB.
 - Flexbox
 - Grid
 - Lambda serverless functions
+- Netlify
 
 ## Author
 
