@@ -13,7 +13,7 @@ This is a movie search site inspired by IMDB.
 ## Overview
 
 ### Screenshot
-
+![gif](./screenshots/movie.gif)
 ![Desktop layout](./screenshots/screenshot.png)
 
 ### Links
