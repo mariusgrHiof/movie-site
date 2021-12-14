@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/mariusgrHiof/movie-site#readme",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "netlify-lambda": "^2.0.8",
     "node-fetch": "^2.6.1"
   }
